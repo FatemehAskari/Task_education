@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/',signup_view),
     path('hello/',include('hello.urls')),
+    path('',include('book.urls')),
     path('__debug__/', include(debug_toolbar.urls))    
 ]
