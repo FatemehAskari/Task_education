@@ -27,5 +27,5 @@ def all_mobiles_with_brand_of(brand_name):
 
 
 def all_available_mobiles_with_price_in_range(min_price, max_price):
-    query = len(Mobile.objects.filter(price__gt=min_price, price__lte=max_price))
+    query = Mobile.objects.filter(price__gt=min_price, price__lte=max_price).count()
     return query
