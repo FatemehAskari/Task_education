@@ -8,13 +8,7 @@ import org.springframework.context.annotation.Bean;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		var ctx=SpringApplication.run(DemoApplication.class, args);
-		MyFirstService myfirsevice = ctx.getBean(MyFirstService.class);
-
-		System.out.println(myfirsevice.tellAStory());
-//		System.out.println(myfirsevice.getJavaVersion());
-//		System.out.println(myfirsevice.getOSName());
-//		System.out.println(myfirsevice.readProp());
+		SpringApplication.run(DemoApplication.class, args);
 	}
 
 }
