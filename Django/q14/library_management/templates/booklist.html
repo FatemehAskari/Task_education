@@ -1,0 +1,25 @@
+<!-- Write load here -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Write link tag here -->
+    <link rel="stylesheet" href="{% static 'library_management/booklist.css' %}">
+    
+    <meta charset="UTF-8">
+    <title>Booklist</title>
+</head>
+<body>
+
+<!-- Write first sentence here -->
+<h1>There are {{books_count}} books in the library.</h1>
+<h3>Books</h3>
+<div>
+{% for book in books %}
+    <p>{{ book.title }}</p>
+{% endfor %}
+</div>
+</body>
+</html>
