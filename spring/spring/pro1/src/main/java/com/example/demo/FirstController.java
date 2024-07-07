@@ -1,8 +1,7 @@
 package com.example.demo;
-
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 public class FirstController {
@@ -12,47 +11,47 @@ public class FirstController {
 //        return "Hello from my first controller";
 //    }
 
-    @GetMapping("/hello-2")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public String sayHello2(){
-        return "Hello 2 from my first controller";
+    private final StudentRepository repository;
+
+
+    public FirstController(StudentRepository repository) {
+        this.repository = repository;
     }
 
-    @PostMapping("/post")
-    public String post(
-          @RequestBody String message
+    @PostMapping("/students")
+    public Student post(
+          @RequestBody Student student
     ){
-        return "Request accepted and message is: " + message;
+        return repository.save(student);
     }
 
-    @PostMapping("/post-order")
-    public String post(
-            @RequestBody Order order
+    @GetMapping("/students/{student-id}")
+    public Student findStudent(
+            @PathVariable("student-id") Integer id
     ){
-        return "Request accepted and order is: " + order.toString();
+        return repository.findById(id)
+                .orElse(new Student());
     }
 
-    @PostMapping("/post-order-record")
-    public String postRecord(
-            @RequestBody OrderRecord order
+    @GetMapping("/students")
+    public List<Student>  findAllStudent(
     ){
-        return "Request accepted and order is: " + order.toString();
+        return repository.findAll();
     }
 
-    //
-//    @GetMapping("/hello/{user-name}")
-//    public String pathVar(
-//          @PathVariable("user-name")  String userName
-//    ){
-//        return "my value = "+ userName;
-//    }
-
-    @GetMapping("/hello")
-    public String pathVar(
-            @RequestParam("user-name") String userName,
-            @RequestParam("user-lastname") String userLastname
+    @GetMapping("/students/search/{student-name}")
+    public List<Student>  findstudentbyname(
+            @PathVariable("student-name") String firstname
     ){
-        return "my value = "+ userName+" "+userLastname;
+        return repository.findAllByFirstnameContaining(firstname);
+    }
+
+    @DeleteMapping("/students/{student-id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletestudent(
+            @PathVariable("student-id") Integer id
+    ){
+         repository.deleteById(id);
     }
 
 }
