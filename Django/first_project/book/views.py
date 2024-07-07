@@ -4,6 +4,18 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 # Create your views here.
 
+
+def html(request):
+    return render(request,'index.html')
+
+def book_detail(request,book_id):
+    book=Book.objects.get(id=book_id)
+    return render(request,'book_detail.html',{"book":book})
+
+def book_all(request):
+    books=Book.objects.all()
+    return render(request,'book_all.html',{"books":books})        
+    
 def start(request):
     return HttpResponse("ddd")
 
