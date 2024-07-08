@@ -1,6 +1,9 @@
-package com.example.demo;
+package com.example.demo.student;
 
 
+import com.example.demo.school.School;
+import com.example.demo.studentprofile.StudentProfile;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -46,6 +49,7 @@ public class Student {
     @JoinColumn(
           name="school_id"
     )
+    @JsonBackReference
     private School school;
 
 
