@@ -1,5 +1,6 @@
-package com.alibou.book.security;
+package com.example.Project2.security;
 
+import com.example.Project2.security.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
