@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Applications</title>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+
+    <script>
+        function searchApplications() {
+          var searchInput = document.getElementById("search-input");
+          var searchValue = searchInput.value;
+          console.log("dfdv")
+          var currentUrl = window.location.href;
+          var newUrl = new URL(currentUrl);
+          newUrl.searchParams.set("app_name", searchValue);
+          window.location.href = newUrl.toString();
+        }
+      </script>
+  </head>
+  <body>
+    <div class="banner">
+      <a href="{% url 'login' %}" class="btn">Login</a>
+      <a href="{% url 'signup' %}" class="btn">Signup</a>
+
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"  
+          placeholder="Search applications..."
+          onkeyup="if(event.keyCode == 13) searchApplications()"
+        />
+        {% comment %} <button onclick="searchApplications()">Search</button> {% endcomment %}
+      </div>
+    </div>
+    <h1>All Applications</h1>
+    <div class="app-container">
+      {% for app in applications %}
+      <div class="app-card">
+        {% if app.image %}
+        <img src="{{ app.image.url }}" alt="{{ app.name }}" />
+        {% else %}
+        <img src="{% static 'default_app_image.png' %}" alt="{{ app.name }}" />
+        {% endif %}
+        <h3>{{ app.name }}</h3>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

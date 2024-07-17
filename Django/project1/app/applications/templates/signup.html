@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Form</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+  </head>
+  <body>
+    <div class="signup-all">
+      <div class="signup-container">
+        <h2>Signup</h2>
+        <form method="post" action ={% url 'signup' %}>
+          {% csrf_token %} 
+           {{ form.as_p }}
+          {% if form.username.errors %} <div>
+            <p>{{ form.username.errors.as_text }}</p>
+          </div> {% endif%}
+          {{form.errors}} 
+          {% comment %} {% csrf_token %} 
+          {% for field in form %}
+          {{ field.label_tag }} {{ field }}
+          {% endfor %} {% endcomment %}
+          <button type="submit">Signup</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
